@@ -1,0 +1,47 @@
+@startuml
+
+class User {
+    - userID: int
+    - username: string
+    - password: string
+    + login(): void
+    + logout(): void
+}
+
+class Book {
+    - bookID: int
+    - title: string
+    - author: string
+    - category: string
+    - availabilityStatus: string
+    + searchByTitle(): void
+    + searchByAuthor(): void
+    + searchByCategory(): void
+    + viewDetails(): void
+}
+
+class Library {
+    - libraryID: int
+    - name: string
+    - location: string
+    + checkAvailability(): void
+    + borrowBook(): void
+    + renewBook(): void
+}
+
+class Loan {
+    - loanID: int
+    - userID: int
+    - bookID: int
+    - borrowDate: Date
+    - returnDate: Date
+    + calculateFine(): void
+    + updateReturnDate(): void
+}
+
+User "1" -- "1..*" Loan
+Book "1" -- "1..*" Loan
+Library "1" -- "1.." Book
+Library "1" -- "1.." Loan
+
+@enduml
