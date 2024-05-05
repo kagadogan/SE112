@@ -1,0 +1,28 @@
+@startuml
+
+left to right direction
+
+actor User as U
+actor Library_Admin as LA
+
+rectangle "Book Management" {
+  usecase "Search for Books" as Search
+  usecase "View Book Details" as View
+  usecase "Borrow Books" as Borrow
+  usecase "Renew Books" as Renew
+  usecase "Check Book Status" as Check
+  usecase "Add New Book" as AddBook
+  usecase "Login" as Login
+
+  U --> Search
+  U --> View
+  U --> Borrow
+  U --> Renew
+  LA --> Check
+  LA --> AddBook
+  U --> Login
+  LA --> Login
+}
+ (Barrow) .> (Renew) : include
+  (Renew) .> (Extend Loan Duration) : extends
+@enduml
