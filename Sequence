@@ -1,0 +1,37 @@
+@startuml
+
+actor User
+participant "Library System" as LS
+participant "Book" as B
+participant "Loan" as L
+
+User -> LS: searchForBook(title)
+activate LS
+LS -> B: searchByTitle(title)
+activate B
+B --> LS: listBooks(books)
+deactivate B
+LS --> User: displayBooks(books)
+
+User -> LS: borrowBook(bookID)
+activate LS
+LS -> B: checkAvailability(bookID)
+activate B
+B --> LS: availabilityStatus
+LS -> L: createLoan(userID, bookID)
+activate L
+LS --> User: confirmationMessage
+deactivate L
+deactivate LS
+
+User -> LS: renewBook(loanID)
+activate LS
+LS -> L: findLoan(loanID)
+activate L
+L --> LS: loanDetails
+LS -> L: renewLoan(loanID)
+L --> LS: renewalConfirmation
+deactivate L
+deactivate LS
+
+@enduml
